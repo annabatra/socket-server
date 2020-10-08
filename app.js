@@ -1,18 +1,21 @@
-// app.js
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io').listen(server);
 
-io.origins(['https://socket-client.jsramverk.me:443']);
+app.use(cors());
+
+io.origins(['https://jsramverk.me:443']);
 
 io.on('connection', function (socket) {
-    console.info("User connected");
+    socket.on('user connected', function(user) {
+        io.emit('user connected', user)
+    })
 
-    socket.on('chat message', function (message) {
-        io.emit('chat message', message);
-    });
+    socket.on('chat message', function(message) {
+        io.emit('chat message', message)
+    })
 });
 
-server.listen(8300);
+server.listen(3001, () => console.log("working"));
