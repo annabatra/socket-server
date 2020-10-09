@@ -18,4 +18,4 @@ io.on('connection', function (socket) {
     })
 });
 
-server.listen(3100, () => console.log("working"));
+server.listen(3100);
