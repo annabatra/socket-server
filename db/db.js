@@ -24,7 +24,7 @@ const app = express();
 // Return a JSON object with list of all documents within the collection.
 app.get("/list", async (request, response) => {
     try {
-        let res = await findInCollection(dsn, "chat", {}, {}, 0);
+        let res = await findInCollection(dsn, "savedmessages", {}, {}, 0);
 
         console.log(res);
         response.json(res);
@@ -74,11 +74,11 @@ async function findAllCollection(dsn, colName, limit) {
 
 
 // lägger till i databasen så det finns som historik
-async function addToChatDB(dsn, collection, message) {
+async function addToChatDB(dsn, colName, msg) {
     const client = await mongo.connect(dsn);
     const db = await client.db();
-    const col = await db.collection(collection);
-    const res = await col.insertOne(message)
+    const col = await db.collection(colName);
+    const res = await col.insertOne(msg)
 
     await client.close();
 
