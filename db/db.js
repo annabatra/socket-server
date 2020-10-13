@@ -24,7 +24,7 @@ const app = express();
 // Return a JSON object with list of all documents within the collection.
 app.get("/list", async (request, response) => {
     try {
-        let res = await findInCollection(dsn, "savedmessages", {}, {}, 0);
+        let res = await findInCollection(dsn, "chat", {}, {}, 0);
 
         console.log(res);
         response.json(res);

@@ -16,7 +16,7 @@ const docs = JSON.parse(fs.readFileSync(
 
 
 // Do it.
-resetCollection(dsn, "savedmessages", docs)
+resetCollection(dsn, "chat", docs)
     .catch(err => console.log(err));
 
 
