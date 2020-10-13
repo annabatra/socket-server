@@ -19,6 +19,7 @@ io.on('connection', function (socket) {
 
     socket.on('chat message', function(message) {
         io.emit('chat message', message)
+        db_chat.addToChatDB(dsn, "savedmessages", message);
     })
 
     socket.on('get history', function() {
